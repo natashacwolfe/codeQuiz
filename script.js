@@ -10,22 +10,22 @@ let questions = [
       answer: "alerts"
     },
     {
-      title: "The condition in an if / else statement is enclosed within ____.",
+      title: "2 The condition in an if / else statement is enclosed within ____.",
       choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
       answer: "parentheses"
     },
     {
-        title: "Commonly used data types DO NOT include:",
+        title: "3 Commonly used data types DO NOT include:",
         choices: ["strings", "booleans", "alerts", "numbers"],
         answer: "alerts"
       },
       {
-        title: "The condition in an if / else statement is enclosed within ____.",
+        title: "4 The condition in an if / else statement is enclosed within ____.",
         choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
         answer: "parentheses"
       },
       {
-        title: "The condition in an if / else statement is enclosed within ____.",
+        title: "5 The condition in an if / else statement is enclosed within ____.",
         choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
         answer: "parentheses"
       }
@@ -34,6 +34,8 @@ let questions = [
   
 
 let timer = 75;
+
+
 
 function codeQuiz(){
     let infoEl = document.createElement("h5");
@@ -49,6 +51,23 @@ function codeQuiz(){
     //Start button quiz begins
 
     startEl.addEventListener("click", function(){
+        let choice1 = document.createElement("button");
+        let choice2 = document.createElement("button");
+        let choice3 = document.createElement("button");
+        let choice4 = document.createElement("button");
+
+
+
+        let correctEl = document.createElement("p");
+
+        for (let i = 0; i < questions.length; i++){
+            let currentQuestion = questions[i];
+                
+
+        }
+     
+
+
       
     })
 
