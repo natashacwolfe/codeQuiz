@@ -45,22 +45,33 @@ function codeQuiz(){
                
                 let currentQuestion = questions[q].title;
                 
-
                 quizTitle.innerHTML = currentQuestion;
+
     renderChoices();
                  
            
                 function renderChoices(){  
                     let buttonDiv = document.createElement("div")
-                    let choiceButtons = document.createElement("button");
+                    
+                    for (let a = 0; a < questions[q].choices.length; a++){
+                        let choiceOptions = questions[q].choices[a];
+                    
+                        let choiceButtons = document.createElement("button");
 
-                    contentBody.appendChild(buttonDiv);
-                    buttonDiv.appendChild(choiceButtons);
-                
-                    for (let choiceOption of questions[q].choices){
-                        choiceButtons.textContent = choiceOption;
+                        choiceButtons.textContent = choiceOptions;
 
-                    }
+                        console.log(choiceOptions);
+                        contentBody.appendChild(buttonDiv);
+                        buttonDiv.appendChild(choiceButtons);
+                     }
+
+
+                    // for (let choiceOptions of questions[q].choices){
+                    //     console.log(choiceOptions)
+                    //     choiceButtons.textContent = choiceOptions;
+                       
+
+                    // }
                 }
            }
 
