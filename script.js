@@ -4,7 +4,7 @@ let quizTitle = document.querySelector("h1");
 
 
 let timer = 0;
-
+let q = 0;
 
 
 
@@ -38,18 +38,18 @@ function codeQuiz(){
             
             
     }, 1000)
-            
+     
     renderQuestion();
-    renderChoices();
+
             function renderQuestion(){
-                let q = 0;
+               
                 let currentQuestion = questions[q].title;
                 
 
                 quizTitle.innerHTML = currentQuestion;
-
+    renderChoices();
                  
-            }
+           
                 function renderChoices(){  
                     let buttonDiv = document.createElement("div")
                     let choiceButtons = document.createElement("button");
@@ -57,17 +57,12 @@ function codeQuiz(){
                     contentBody.appendChild(buttonDiv);
                     buttonDiv.appendChild(choiceButtons);
                 
-                    for (let choiceOption = 0; choiceOption < questions[q].choices.length; choiceOption++){
-                        let choiceText = questions[q].choice[choiceOption];
-                        
-
-                      
-                        console.log(choiceText);
-                        choiceButton.innerHTML = choiceText;
+                    for (let choiceOption of questions[q].choices){
+                        choiceButtons.textContent = choiceOption;
 
                     }
                 }
-          
+           }
 
             
                 
