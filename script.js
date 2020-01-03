@@ -42,10 +42,13 @@ function codeQuiz(){
     renderQuestion();
 
             function renderQuestion(){
-               
+                let questionContent = document.createElement("h5")
+
+                contentBody.appendChild(questionContent);
+
                 let currentQuestion = questions[q].title;
                 
-                quizTitle.innerHTML = currentQuestion;
+                questionContent.innerHTML = currentQuestion;
 
     renderChoices();
                  
@@ -54,24 +57,45 @@ function codeQuiz(){
                     let buttonDiv = document.createElement("div")
                     
                     for (let a = 0; a < questions[q].choices.length; a++){
-                        let choiceOptions = questions[q].choices[a];
+                        let choiceOption = questions[q].choices[a];
                     
                         let choiceButtons = document.createElement("button");
 
-                        choiceButtons.textContent = choiceOptions;
+                        choiceButtons.textContent = choiceOption;
 
-                        console.log(choiceOptions);
+                        console.log(choiceOption);
+
                         contentBody.appendChild(buttonDiv);
                         buttonDiv.appendChild(choiceButtons);
-                     }
+                    
 
+                        choiceButtons.addEventListener("click", function(){
+                            let checkAnswer = document.createElement("p")
 
-                    // for (let choiceOptions of questions[q].choices){
-                    //     console.log(choiceOptions)
-                    //     choiceButtons.textContent = choiceOptions;
-                       
+                            contentBody.append(checkAnswer)
 
-                    // }
+                            if (choiceOption !== questions[q].answer){
+                                
+
+                                checkAnswer.textContent = "Incorrect";
+                               
+                               timer -= 15;
+                            
+                                q++;
+
+                                renderQuestion(q);
+                                
+                            } else if (choiceOption === questions[q].answer) {
+
+                                checkAnswer.textContent = "Correct";
+
+                                q++;
+
+                                renderQuestion(q);
+                            }
+
+                        }) 
+                    }
                 }
            }
 
