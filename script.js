@@ -1,17 +1,14 @@
 let count = document.querySelector("#count");
 let contentBody = document.querySelector(".content");
+let body = document.querySelector("body");
 let quizTitle = document.querySelector("h1");
-
 
 let timer = 0;
 let q = 0;
 
-
-
 function codeQuiz(){
     let info = document.createElement("h5");
     let startButton = document.createElement("button");
-   
 
     quizTitle.textContent = "Coding Quiz Challange";
     info.innerHTML = "Try to answer the following code-related questions within the time limit. Keep in mind that an incorrect answer will penalize your score/time 15 seconds!";
@@ -31,12 +28,6 @@ function codeQuiz(){
             count.textContent = timer;
             timer --;
 
-            //if (secondsLeft === 0) {
-            //     clearInterval(timeInterval);
-            //     alert highscore;
-            // }
-            
-            
     }, 1000)
      
     renderQuestion();
@@ -46,66 +37,69 @@ function codeQuiz(){
 
                 contentBody.appendChild(questionContent);
 
-                let currentQuestion = questions[q].title;
-                
-                questionContent.innerHTML = currentQuestion;
+                questionContent.textContent = questions[q].title;
 
     renderChoices();
-                 
-           
+               
                 function renderChoices(){  
                     let buttonDiv = document.createElement("div")
                     
                     for (let a = 0; a < questions[q].choices.length; a++){
-                        let choiceOption = questions[q].choices[a];
+                            let choiceOption = questions[q].choices[a];
                     
-                        let choiceButtons = document.createElement("button");
+                            let choiceButtons = document.createElement("button");
 
-                        choiceButtons.textContent = choiceOption;
+                            console.log(choiceOption)
 
-                        console.log(choiceOption);
+                            choiceButtons.textContent = choiceOption;
 
-                        contentBody.appendChild(buttonDiv);
-                        buttonDiv.appendChild(choiceButtons);
+                            contentBody.appendChild(buttonDiv);
+                            buttonDiv.appendChild(choiceButtons);
                     
-
                         choiceButtons.addEventListener("click", function(){
-                            let checkAnswer = document.createElement("p")
 
-                            contentBody.append(checkAnswer)
+                            let checkAnswerDiv = document.createElement("div");
+                            let checkAnswer = document.createElement("h6");
 
+                            body.append(checkAnswerDiv);
+                            checkAnswerDiv.append(checkAnswer); 
+    
                             if (choiceOption !== questions[q].answer){
                                 
-
                                 checkAnswer.textContent = "Incorrect";
                                
-                               timer -= 15;
-                            
-                                q++;
+                                timer -= 15;
 
-                                renderQuestion(q);
-                                
                             } else if (choiceOption === questions[q].answer) {
 
-                                checkAnswer.textContent = "Correct";
+                                checkAnswer.textContent = "Correct";   
 
-                                q++;
+                            } else if (q == undefined){
 
-                                renderQuestion(q);
+                                checkAnswerDiv.removeChild(checkAnswer);
+                                body.removeChild(checkAnswerDiv);
                             }
+                                contentBody.removeChild(questionContent);
+                                contentBody.removeChild(buttonDiv);
 
-                        }) 
-                    }
+                                q++
+
+                            renderQuestion(q);
+                            
+                            checkAnswerWait();
+
+                            function checkAnswerWait(){
+                                setTimeout(() => {
+                        
+                                    checkAnswerDiv.removeChild(checkAnswer);
+                                    body.removeChild(checkAnswerDiv);
+                             
+                            }, 500);
+                        } 
+                    })
                 }
-           }
-
-            
-                
-                    
-    
-         
-
-
+            }
+        }
     })
 }
 
