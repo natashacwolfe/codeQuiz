@@ -1,6 +1,6 @@
 let count = document.querySelector("#count");
 let contentBody = document.querySelector(".content");
-let quizTitle = document.querySelector("h1");
+let quizTitle = document.createElement("h1");
 let info = document.createElement("h5");
 let startButton = document.createElement("button");
 let questionTitle = document.querySelector(".questions")
@@ -10,15 +10,47 @@ let choiceButtons = document.createElement("button");
 let answerAlertDiv = document.querySelector(".answerAlertDiv");
 let answerAlert = document.createElement("h6");
 let choiceOption ;
-let quizCompleteAlert = document.createElement("h2");
+let quizCompleteAlert = document.createElement("h5");
+let userInitials = document.createElement("input");
+let scoreAdd = document.querySelector(".scoreAdd");
+let submitScore = document.createElement("button");
+let userInput
 let timeInterval;
 let timer = 0;
 let q = 0;
 
 function finalScore(){
+    quizTitle.innerHTML = "All done!";
+    quizCompleteAlert.textContent = "You final score is " + timer;
+
+    
+    contentBody.appendChild(quizCompleteAlert);
+    clearInterval(timeInterval);
+    userName();
+}
+
+function userName(){
+    userInitials.placeholder = "Enter your initials";
+    submitScore.innerText = "Add Score";
+
+    contentBody.appendChild(userInitials);
+    contentBody.appendChild(submitScore);
+}
+
+function addToHighscore(event){
+    event.preventDefault();    
+    document.location.href = "highScore.html";
+    userInput = userInitials.value; 
+    localStorage.setItem("Username", userInput)
+    localStorage.setItem("Score", timer)
 
 }
 
+function getStorage(event) {
+    let highScore = JSON.parse(localStorage.getItem("Score"));
+    console.log(Score);
+
+}
 
 function checkAnswerWait(){
     setTimeout(function() {
@@ -89,9 +121,10 @@ function startTimer(){
 function countdown(){
     count.textContent = timer;
     timer --;
-
-    if (timer == 0){
+    if (timer < 0){
         finalScore();
+        deleteButton(buttonDiv);
+        deleteButton(questionTitle);
     }
 }
 
@@ -114,6 +147,7 @@ function codeQuiz(){
     info.innerHTML = "Try to answer the following code-related questions within the time limit. Keep in mind that an incorrect answer will penalize your score/time 15 seconds!";
     startButton.textContent = "Start Quiz";
 
+    contentBody.appendChild(quizTitle);
     contentBody.appendChild(info);
     contentBody.appendChild(startButton);
 }
@@ -131,9 +165,9 @@ function startQuiz(){
 }
 
 
-startButton.addEventListener("click", startQuiz)
-buttonDiv.addEventListener("click", processAnswer)
-// restart.addEventListener("click", reset)
+startButton.addEventListener("click", startQuiz);
+buttonDiv.addEventListener("click", processAnswer);
+submitScore.addEventListener("click", addToHighscore);
 
 //entry point
 codeQuiz();
