@@ -1,6 +1,6 @@
 let questions = [
     {
-      title: "Commonly used data types DO NOT include:",
+      title: "1 Commonly used data types DO NOT include:",
       choices: ["strings", "booleans", "alerts", "numbers"],
       answer: "alerts"
     },
