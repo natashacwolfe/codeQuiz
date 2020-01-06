@@ -12,9 +12,9 @@ let answerAlert = document.createElement("h6");
 let choiceOption ;
 let quizCompleteAlert = document.createElement("h5");
 let userInitials = document.createElement("input");
+
 let scoreAdd = document.querySelector(".scoreAdd");
 let submitScore = document.createElement("button");
-let userInput
 let timeInterval;
 let timer = 0;
 let q = 0;
@@ -23,7 +23,6 @@ function finalScore(){
     quizTitle.innerHTML = "All done!";
     quizCompleteAlert.textContent = "You final score is " + timer;
 
-    
     contentBody.appendChild(quizCompleteAlert);
     clearInterval(timeInterval);
     userName();
@@ -35,21 +34,6 @@ function userName(){
 
     contentBody.appendChild(userInitials);
     contentBody.appendChild(submitScore);
-}
-
-function addToHighscore(event){
-    event.preventDefault();    
-    document.location.href = "highScore.html";
-    userInput = userInitials.value; 
-    localStorage.setItem("Username", userInput)
-    localStorage.setItem("Score", timer)
-
-}
-
-function getStorage(event) {
-    let highScore = JSON.parse(localStorage.getItem("Score"));
-    console.log(Score);
-
 }
 
 function checkAnswerWait(){
@@ -78,6 +62,7 @@ function checkAnswer(answer){
     }
     checkAnswerWait();
 }
+
 function processAnswer(event){
     let answer = event.target.innerText;
     let correct = checkAnswer(answer);
@@ -87,9 +72,8 @@ function processAnswer(event){
     nextQuestion();
 }
 
-
 function renderChoices(){  
-
+    
     for (let a = 0; a < questions[q].choices.length; a++){
         choiceOption = questions[q].choices[a];
         choiceButtons = document.createElement("button");
@@ -167,7 +151,8 @@ function startQuiz(){
 
 startButton.addEventListener("click", startQuiz);
 buttonDiv.addEventListener("click", processAnswer);
-submitScore.addEventListener("click", addToHighscore);
+
+
 
 //entry point
 codeQuiz();
