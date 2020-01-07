@@ -8,7 +8,7 @@
 
 
 ### Technologies Used
-
+***
 * HTML
 * CSS
 * Bootstrap
@@ -16,5 +16,5 @@
 
 
 ### Purpose
-
+***
  This project was to better understand JavaScript in general and dynamic dom manipulation. It is my first project that has actual functionality. It was very fun and challenging to create! I learned so much from this project about logic, functions, local storage, and some of the powerful tools of JavaScript.
