@@ -40,7 +40,7 @@ function addToHighscore(event){
         username: userInitials.value,
         score: timer
     }
-    
+
     highScoreUser.push(playerScore);
 
     localStorage.setItem("codeQuiz", JSON.stringify(highScoreUser));
@@ -76,23 +76,28 @@ function checkAnswer(answer){
         console.log("Incorrect");
         answerAlert.textContent = "Incorrect";
         answerAlertDiv.appendChild(answerAlert);
+        return false
     } else {
         console.log("Correct");
         answerAlert.textContent = "Correct";
         answerAlertDiv.appendChild(answerAlert);
-    }
+        return true
+    } 
     
-    checkAnswerWait();
+    
 }
 
 function processAnswer(event){
     let answer = event.target.innerText;
     let correct = checkAnswer(answer);
+   
     if (!correct){
-        timer -= 15; 
-    } 
-    nextQuestion();
-}
+        timer -=15;
+    } checkAnswerWait();
+        nextQuestion();
+    }
+    
+
 
 function renderChoices(){  
     
@@ -124,9 +129,9 @@ function startTimer(){
     timeInterval = setInterval(countdown, 1000)
 }
 
-function countdown(){
-    count.textContent = timer;
+function countdown(){  
     timer --;
+    count.textContent = timer;
     if (timer < 0){
         finalScore();
         deleteButton(buttonDiv);

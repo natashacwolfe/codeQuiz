@@ -1,0 +1,8 @@
+/* Box sizing */
+
+* {
+    margin: 0; /* clearing margin and padding from page */
+    padding: 0;
+    box-sizing: border-box;
+}
+
