@@ -1,48 +1,24 @@
-let clearHighScores = document.getElementById("clear");
-let highScoreItem = document.createElement("li");
+
 let highScoreList = document.querySelector("ol");
-
-let highScoreUser;
-let mostRecentScore;
+let clearHighScores = document.getElementById("clear");
+let backButton = document.getElementById("back");
 let maxScore = 5;
-let score = {
-    username: userInitials.value,
-    score: mostRecentScore
-}
-
-
-
-function userSubmit(){
-    document.location.href = "highScore.html";
-    console.log("score submitted!")
-}
-
-function setStorage(){
-    mostRecentScore = timer;
-    localStorage.setItem("username", (userInitials.value));
-    localStorage.setItem("score", JSON.stringify(mostRecentScore));
-
-    console.log(JSON.parse(localStorage.getItem("score")))
-    console.log(localStorage.getItem("username"));
-}
 
 function getStorage() {
-    highScoreUser = localStorage.getItem("username");
-    score.username.push(userInitials.value);
-    highScore = JSON.parse(localStorage.getItem("score"));
-    score.score.push(highScore);
-    console.log(score)
+    highScore = JSON.parse(window.localStorage.getItem("codeQuiz")) || [];
+    console.log(highScore);
 
-  
+    highScore.sort( function (a, b){
+        return b.score - a.score;
+    })
+    highScore.forEach(function(score){
+        let highScoreItem = document.createElement("li");
+        highScoreItem.textContent = score.username + ": " + score.score;
+        highScoreList.appendChild(highScoreItem);
+    })
 }
-
-// function saveScore(){
-//     for (let i = 0; i < score.length; i++){
-//         score = score[i];
-//         highScoreItem.textContent = score;
-
-//         highScoreList.appendChild(highScoreItem);
-//     }
+// function maxHighScores(){
+//     highScoreItem.splice(5)
 // }
 
 function goBack(event){
@@ -50,20 +26,15 @@ function goBack(event){
 }
 
 function clear(event){
-    localStorage.clear();
+    console.log(event)
+    localStorage.removeItem("codeQuiz");
+    window.location.reload();
 }
 
+// maxHighScores();
+getStorage();
 
 
-function addToHighscore(event){
-    event.preventDefault();    
-    userSubmit();
-    setStorage();
-    getStorage();
-    // saveScore();
-}
 
-
-submitScore.addEventListener("click", addToHighscore);
-back.addEventListener("click", goBack);
 clearHighScores.addEventListener("click", clear);
+backButton.addEventListener("click", goBack);

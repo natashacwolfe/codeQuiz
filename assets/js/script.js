@@ -12,20 +12,41 @@ let answerAlert = document.createElement("h6");
 let choiceOption ;
 let quizCompleteAlert = document.createElement("h5");
 let userInitials = document.createElement("input");
+let clearHighScores = document.getElementById("clear");
 
 let scoreAdd = document.querySelector(".scoreAdd");
 let submitScore = document.createElement("button");
+
 let timeInterval;
 let timer = 0;
 let q = 0;
 
+
 function finalScore(){
     quizTitle.innerHTML = "All done!";
     quizCompleteAlert.textContent = "You final score is " + timer;
-
+ 
     contentBody.appendChild(quizCompleteAlert);
     clearInterval(timeInterval);
     userName();
+}
+
+
+
+
+function addToHighscore(event){
+    let highScoreUser = JSON.parse(window.localStorage.getItem("codeQuiz")) ||  [];
+    let playerScore = {
+        username: userInitials.value,
+        score: timer
+    }
+    
+    highScoreUser.push(playerScore);
+
+    localStorage.setItem("codeQuiz", JSON.stringify(highScoreUser));
+
+    document.location.href = "highScore.html";
+    event.preventDefault();    
 }
 
 function userName(){
@@ -60,6 +81,7 @@ function checkAnswer(answer){
         answerAlert.textContent = "Correct";
         answerAlertDiv.appendChild(answerAlert);
     }
+    
     checkAnswerWait();
 }
 
@@ -151,6 +173,7 @@ function startQuiz(){
 
 startButton.addEventListener("click", startQuiz);
 buttonDiv.addEventListener("click", processAnswer);
+submitScore.addEventListener("click", addToHighscore);
 
 
 
