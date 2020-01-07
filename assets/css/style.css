@@ -1,8 +1,53 @@
 /* Box sizing */
-
 * {
-    margin: 0; /* clearing margin and padding from page */
+    margin: 0; 
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Buttons  */
+.answerSelection, 
+.startbtn, 
+.submit,
+#clear, 
+#back {
+    background-color: rgba(85, 193, 207, 0.616);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px;
+}
+
+/* adding space between nav & content */
+#header {
+    margin-bottom: 50px;
+}
+
+/* adding space top of highscores page so content isnt right at the top */
+#highscore-container {
+    margin-top:50px;
+
+}
+
+/* quiz intro text */
+.info {
+    text-align: center;
+}
+
+/* user intials box to add to high scores*/
+input {
+    height: 40px;
+    padding-right: 50px;
+    margin-right: 15px;
+    background-color: rgba(85, 193, 207, 0.236);
+}
+
+/* view highscores link */
+#link {
+    text-decoration: none;
+    color: rgba(85, 193, 207);
+}
+
+/* quiz main title start page */
+.title{
+    text-align: center;
+}
